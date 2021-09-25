@@ -1,31 +1,18 @@
 package com.tekcapsule.feedback.domain.command;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.tekcapsule.feedback.domain.model.*;
-import in.devstream.core.domain.Command;
-import in.devstream.mentor.domain.model.*;
-import in.tekcapsule.capsule.domain.model.*;
+import com.tekcapsule.core.domain.Command;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Builder
-public class CreateCommand extends Command  {
-    private Name name;
-    private Gender gender;
-    private String tenantId;
-    private String headLine;
-    private Contact contact;
-    private String photoUrl;
-    private DateOfBirth dateOfBirth;
-    private List<String> tags;
-    List<ProfessionalExperience> professionalExperiences;
-    List<EducationalQualification> educationalQualifications;
-    List<Award> awards;
-    List<Certification> certifications;
-    List<Publication> publications;
-    private Social social;
+public class CreateCommand extends Command {
+    private String emailId;
+    private String firstName;
+    private String lastName;
+    private String subject;
+    private String description;
 }
