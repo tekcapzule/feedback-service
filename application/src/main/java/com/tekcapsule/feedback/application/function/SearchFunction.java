@@ -1,10 +1,8 @@
 package com.tekcapsule.feedback.application.function;
 
 import com.tekcapsule.feedback.application.config.AppConstants;
-import com.tekcapsule.feedback.application.function.input.SearchInput;
-import in.devstream.mentor.domain.query.SearchItem;
-import in.devstream.mentor.domain.query.SearchQuery;
-import in.devstream.mentor.domain.service.MentorService;
+import com.tekcapsule.feedback.domain.model.Feedback;
+import com.tekcapsule.feedback.domain.service.FeedbackService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.messaging.Message;
@@ -21,10 +19,10 @@ import java.util.function.Function;
 @Slf4j
 public class SearchFunction implements Function<Message<SearchInput>, Message<List<SearchItem>>> {
 
-    private final MentorService mentorService;
+    private final FeedbackService feedbackService;
 
-    public SearchFunction(final MentorService mentorService) {
-        this.mentorService = mentorService;
+    public SearchFunction(final FeedbackService feedbackService) {
+        this.feedbackService = feedbackService;
     }
 
 

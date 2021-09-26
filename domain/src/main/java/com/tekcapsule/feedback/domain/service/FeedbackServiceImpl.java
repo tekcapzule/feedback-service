@@ -35,6 +35,9 @@ public class FeedbackServiceImpl implements FeedbackService {
                 .build();
 
         feedback.setAddedOn(createCommand.getExecOn());
+        feedback.setUpdatedOn(createCommand.getExecOn());
+        feedback.setAddedBy(createCommand.getExecBy().getUserId());
+        feedback.setUpdatedBy(createCommand.getExecBy().getUserId());
 
         return feedbackDynamoRepository.save(feedback);
     }
@@ -42,35 +45,22 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public void markAsRead(MarkAsReadCommand markAsReadCommand) {
 
-        log.info(String.format("Entering markAsRead feedback service - Tenant Id:{0}, User Id:{1}", markAsReadCommand.getTenantId(), markAsReadCommand.getUserId()));
+        log.info(String.format("Entering markAsRead feedback service - Id:{1}", markAsReadCommand.getId()));
 
-        log.info(String.format("Entering update mentor service - Tenant Id:{0}, User Id:{1}", updateCommand.getTenantId(), updateCommand.getUserId()));
-
-        Feedback feedback = feedbackDynamoRepository.findBy(markAsReadCommand.getEmailId());
+        Feedback feedback = feedbackDynamoRepository.findBy(markAsReadCommand.getId());
         if (feedback != null) {
-            mentor.setAwards(updateCommand.getAwards());
-            mentor.setHeadLine(updateCommand.getHeadLine());
-            mentor.setContact(updateCommand.getContact());
-            mentor.setCertifications(updateCommand.getCertifications());
-            mentor.setPhotoUrl(updateCommand.getPhotoUrl());
-            mentor.setTags(updateCommand.getTags());
-            mentor.setSocial(updateCommand.getSocial());
-            mentor.setEducationalQualifications(updateCommand.getEducationalQualifications());
-            mentor.setProfessionalExperiences(updateCommand.getProfessionalExperiences());
-            mentor.setPublications(updateCommand.getPublications());
+            feedback.setRead(true);
 
-            mentor.setUpdatedOn(updateCommand.getExecOn());
-            mentor.setUpdatedBy(updateCommand.getExecBy().getUserId());
+            feedback.setUpdatedOn(markAsReadCommand.getExecOn());
+            feedback.setUpdatedBy(markAsReadCommand.getExecBy().getUserId());
 
-            mentorRepository.save(mentor);
+            feedbackDynamoRepository.save(feedback);
         }
-        return mentor;
-        feedbackDynamoRepository.(markAsReadCommand.getTenantId(), markAsReadCommand.getUserId());
     }
     @Override
     public List<Feedback> findAll() {
 
-        log.info(String.format("Entering findAll feedback service");
+        log.info(String.format("Entering findAll feedback service"));
 
         return feedbackDynamoRepository.findAll();
     }

@@ -27,8 +27,8 @@ public class FeedbackRepositoryImpl implements FeedbackDynamoRepository {
     }
 
     @Override
-    public Feedback findBy(String emailId) {
-        return dynamo.load(Feedback.class, emailId);
+    public Feedback findBy(String id) {
+        return dynamo.load(Feedback.class, id);
     }
 
     @Override

@@ -3,9 +3,9 @@ package com.tekcapsule.feedback.application.function;
 import com.tekcapsule.core.domain.Origin;
 import com.tekcapsule.core.utils.HeaderUtil;
 import com.tekcapsule.feedback.application.config.AppConstants;
-import com.tekcapsule.feedback.application.function.input.CreateInput;
+import com.tekcapsule.feedback.application.function.input.MarkAsReadInput;
 import com.tekcapsule.feedback.application.mapper.InputOutputMapper;
-import com.tekcapsule.feedback.domain.model.Feedback;
+import com.tekcapsule.feedback.domain.model.Feedback;ß
 import com.tekcapsule.feedback.domain.service.FeedbackService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -19,29 +19,28 @@ import java.util.function.Function;
 
 @Component
 @Slf4j
-public class CreateFunction implements Function<Message<CreateInput>, Message<Feedback>> {
-
+public class MarkAsReadFunction implements Function<Message<MarkAsReadInput>, Message<Void>> {
     private final FeedbackService feedbackService;
 
-    public CreateFunction(final FeedbackService feedbackService) {
+    public MarkAsReadFunction(final FeedbackService feedbackService) {
         this.feedbackService = feedbackService;
     }
 
 
     @Override
-    public Message<Feedback> apply(Message<CreateInput> createInputMessage) {
+    public Message<Void> apply(Message<MarkAsReadInput> disableInputMessage) {
 
-        CreateInput createInput = createInputMessage.getPayload();
+        MarkAsReadInput markAsReadInput = disableInputMessage.getPayload();
 
-        log.info(String.format("Entering create mentor Function - Tenant Id:{0}, Name:{1}", createInput.getTenantId(), createInput.getName().toString()));
+        log.info(String.format("Entering disable mentor Function - Tenant Id:{0}, User Id:{1}", markAsReadInput.getTenantId(), markAsReadInput.getUserId()));
 
-        Origin origin = HeaderUtil.buildOriginFromHeaders(createInputMessage.getHeaders());
+        Origin origin = HeaderUtil.buildOriginFromHeaders(disableInputMessage.getHeaders());
 
-        CreateCommand createCommand = InputOutputMapper.buildCreateCommandFromCreateInput.apply(createInput, origin);
-        Mentor mentor = mentorService.create(createCommand);
+        DisableCommand disableCommand = InputOutputMapper.buildDisableCommandFromDisableInput.apply(markAsReadInput, origin);
+        mentorService.disable(disableCommand);
         Map<String, Object> responseHeader = new HashMap();
         responseHeader.put(AppConstants.HTTP_STATUS_CODE_HEADER, HttpStatus.OK.value());
 
-        return new GenericMessage(mentor, responseHeader);
+        return new GenericMessage( responseHeader);
     }
 }

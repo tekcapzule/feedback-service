@@ -1,13 +1,12 @@
 package com.tekcapsule.feedback.application.mapper;
 
+import com.tekcapsule.core.domain.Command;
+import com.tekcapsule.core.domain.ExecBy;
+import com.tekcapsule.core.domain.Origin;
 import com.tekcapsule.feedback.application.function.input.CreateInput;
-import in.devstream.core.domain.Command;
-import in.devstream.core.domain.ExecBy;
-import in.devstream.core.domain.Origin;
-import com.tekcapsule.feedback.application.function.input.DisableInput;
-import in.devstream.mentor.domain.command.CreateCommand;
-import in.devstream.mentor.domain.command.DisableCommand;
-import in.devstream.mentor.domain.command.UpdateCommand;
+import com.tekcapsule.feedback.application.function.input.MarkAsReadInput;
+import com.tekcapsule.feedback.domain.command.CreateCommand;
+import com.tekcapsule.feedback.domain.command.MarkAsReadCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 
@@ -36,18 +35,11 @@ public final class InputOutputMapper {
         return createCommand;
     };
 
-    public static final BiFunction<UpdateInput, Origin, UpdateCommand> buildUpdateCommandFromUpdateInput = (updateInput, origin) -> {
-        UpdateCommand updateCommand = UpdateCommand.builder().build();
-        BeanUtils.copyProperties(updateInput, updateCommand);
-        addOrigin.apply(updateCommand, origin);
-        return updateCommand;
-    };
-
-    public static final BiFunction<DisableInput, Origin, DisableCommand> buildDisableCommandFromDisableInput = (disableInput, origin) -> {
-        DisableCommand disableCommand =  DisableCommand.builder().build();
-        BeanUtils.copyProperties(disableInput, disableCommand);
-        addOrigin.apply(disableCommand, origin);
-        return disableCommand;
+    public static final BiFunction<MarkAsReadInput, Origin, MarkAsReadCommand> buildMarkAsReadCommandFromMarkAsReadInput = (markAsReadInput, origin) -> {
+        MarkAsReadCommand markAsReadCommand =  MarkAsReadCommand.builder().build();
+        BeanUtils.copyProperties(markAsReadInput, markAsReadCommand);
+        addOrigin.apply(markAsReadCommand, origin);
+        return markAsReadCommand;
     };
 
 }
