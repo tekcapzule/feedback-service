@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Builder
-public class DisableCommand extends Command {
+public class MarkAsReadCommand extends Command {
     private String emailId;
+    private String
 }

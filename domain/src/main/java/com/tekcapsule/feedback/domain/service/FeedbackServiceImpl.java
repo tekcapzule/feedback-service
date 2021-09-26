@@ -1,12 +1,10 @@
 package com.tekcapsule.feedback.domain.service;
 
 import com.tekcapsule.feedback.domain.command.CreateCommand;
-import com.tekcapsule.feedback.domain.command.DisableCommand;
+import com.tekcapsule.feedback.domain.command.MarkAsReadCommand;
 import com.tekcapsule.feedback.domain.model.Feedback;
 import com.tekcapsule.feedback.domain.repository.FeedbackDynamoRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,54 +23,54 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public Feedback create(CreateCommand createCommand) {
 
-        log.info(String.format("Entering create mentor service - Tenant Id:{0}, Name:{1}", createCommand.getTenantId(), createCommand.getName().toString()));
+        log.info(String.format("Entering create feedback service - Email Id:{0}", createCommand.getEmailId()));
 
-        Name name = createCommand.getName();
-        if (name != null) {
-            name.setDisplayName(String.format("{0} {1}", name.getFirstName(), name.getLastName()));
-        }
-        DateOfBirth dateOfBirth = createCommand.getDateOfBirth();
-        if (dateOfBirth != null) {
-            dateOfBirth.setDateOfBirth(String.format("{0}/{1}/{2}", dateOfBirth.getDay(), dateOfBirth.getMonth(), dateOfBirth.getYear()));
-        }
         Feedback feedback = Feedback.builder()
-                .active(true)
-                .activeSince(DateTime.now(DateTimeZone.UTC).toString())
-                .blocked(false)
-                .awards(createCommand.getAwards())
-                .certifications(createCommand.getCertifications())
-                .contact(createCommand.getContact())
-                .dateOfBirth(dateOfBirth)
-                .educationalQualifications(createCommand.getEducationalQualifications())
-                .headLine(createCommand.getHeadLine())
-                .name(name)
-                .professionalExperiences(createCommand.getProfessionalExperiences())
-                .publications(createCommand.getPublications())
-                .social(createCommand.getSocial())
-                .tags(createCommand.getTags())
-                .tenantId(createCommand.getTenantId())
-                .userId(createCommand.getContact().getEmailId())
+                .description(createCommand.getDescription())
+                .emailId(createCommand.getEmailId())
+                .firstName(createCommand.getFirstName())
+                .lastName(createCommand.getLastName())
+                .subject(createCommand.getSubject())
+                .read(false)
                 .build();
 
         feedback.setAddedOn(createCommand.getExecOn());
-        feedback.setUpdatedOn(createCommand.getExecOn());
-        feedback.setAddedBy(createCommand.getExecBy().getUserId());
 
-        return mentorRepository.save(feedback);
+        return feedbackDynamoRepository.save(feedback);
     }
 
     @Override
-    public void markAsRead(DisableCommand disableCommand) {
+    public void markAsRead(MarkAsReadCommand markAsReadCommand) {
 
-        log.info(String.format("Entering disable mentor service - Tenant Id:{0}, User Id:{1}", disableCommand.getTenantId(), disableCommand.getUserId()));
+        log.info(String.format("Entering markAsRead feedback service - Tenant Id:{0}, User Id:{1}", markAsReadCommand.getTenantId(), markAsReadCommand.getUserId()));
 
-        feedbackDynamoRepository.disableById(disableCommand.getTenantId(), disableCommand.getUserId());
+        log.info(String.format("Entering update mentor service - Tenant Id:{0}, User Id:{1}", updateCommand.getTenantId(), updateCommand.getUserId()));
+
+        Feedback feedback = feedbackDynamoRepository.findBy(markAsReadCommand.getEmailId());
+        if (feedback != null) {
+            mentor.setAwards(updateCommand.getAwards());
+            mentor.setHeadLine(updateCommand.getHeadLine());
+            mentor.setContact(updateCommand.getContact());
+            mentor.setCertifications(updateCommand.getCertifications());
+            mentor.setPhotoUrl(updateCommand.getPhotoUrl());
+            mentor.setTags(updateCommand.getTags());
+            mentor.setSocial(updateCommand.getSocial());
+            mentor.setEducationalQualifications(updateCommand.getEducationalQualifications());
+            mentor.setProfessionalExperiences(updateCommand.getProfessionalExperiences());
+            mentor.setPublications(updateCommand.getPublications());
+
+            mentor.setUpdatedOn(updateCommand.getExecOn());
+            mentor.setUpdatedBy(updateCommand.getExecBy().getUserId());
+
+            mentorRepository.save(mentor);
+        }
+        return mentor;
+        feedbackDynamoRepository.(markAsReadCommand.getTenantId(), markAsReadCommand.getUserId());
     }
-
     @Override
     public List<Feedback> findAll() {
 
-        log.info(String.format("Entering search mentor service - Tenant Id:{0}", searchQuery.getTenantId()));
+        log.info(String.format("Entering findAll feedback service");
 
         return feedbackDynamoRepository.findAll();
     }
