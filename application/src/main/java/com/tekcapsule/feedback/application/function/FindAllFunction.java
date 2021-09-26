@@ -27,7 +27,7 @@ public class FindAllFunction implements Function<Message<Void>, Message<List<Fee
 
 
     @Override
-    public Message<List<Feedback>> apply(Message<Void> searchInputMessage) {
+    public Message<List<Feedback>> apply(Message<Void> findAllInputMessage) {
         log.info(String.format("Entering find all feedback Function"));
 
         List<Feedback> feedbacks = feedbackService.findAll();

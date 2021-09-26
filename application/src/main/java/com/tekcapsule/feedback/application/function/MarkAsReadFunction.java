@@ -28,13 +28,13 @@ public class MarkAsReadFunction implements Function<Message<MarkAsReadInput>, Me
 
 
     @Override
-    public Message<Void> apply(Message<MarkAsReadInput> disableInputMessage) {
+    public Message<Void> apply(Message<MarkAsReadInput> markAsReadInputMessage) {
 
-        MarkAsReadInput markAsReadInput = disableInputMessage.getPayload();
+        MarkAsReadInput markAsReadInput = markAsReadInputMessage.getPayload();
 
         log.info(String.format("Entering mark as read feedback Function - Id:{0}", markAsReadInput.getId()));
 
-        Origin origin = HeaderUtil.buildOriginFromHeaders(disableInputMessage.getHeaders());
+        Origin origin = HeaderUtil.buildOriginFromHeaders(markAsReadInputMessage.getHeaders());
 
         MarkAsReadCommand markAsReadCommand = InputOutputMapper.buildMarkAsReadCommandFromMarkAsReadInput.apply(markAsReadInput, origin);
         feedbackService.markAsRead(markAsReadCommand);
