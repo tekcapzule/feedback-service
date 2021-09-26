@@ -17,25 +17,23 @@ import java.util.function.Function;
 
 @Component
 @Slf4j
-public class SearchFunction implements Function<Message<SearchInput>, Message<List<SearchItem>>> {
+public class FindAllFunction implements Function<Message<Void>, Message<List<Feedback>>> {
 
     private final FeedbackService feedbackService;
 
-    public SearchFunction(final FeedbackService feedbackService) {
+    public FindAllFunction(final FeedbackService feedbackService) {
         this.feedbackService = feedbackService;
     }
 
 
     @Override
-    public Message<List<SearchItem>> apply(Message<SearchInput> searchInputMessage) {
-        SearchInput searchInput = searchInputMessage.getPayload();
+    public Message<List<Feedback>> apply(Message<Void> searchInputMessage) {
+        log.info(String.format("Entering find all feedback Function"));
 
-        log.info(String.format("Entering search mentor Function - Tenant Id:{0}", searchInput.getTenantId()));
-
-        List<SearchItem> searchItems = mentorService.search(SearchQuery.builder().tenantId(searchInput.getTenantId()).build());
+        List<Feedback> feedbacks = feedbackService.findAll();
         Map<String, Object> responseHeader = new HashMap();
         responseHeader.put(AppConstants.HTTP_STATUS_CODE_HEADER, HttpStatus.OK.value());
 
-        return new GenericMessage(searchItems, responseHeader);
+        return new GenericMessage(feedbacks, responseHeader);
     }
 }

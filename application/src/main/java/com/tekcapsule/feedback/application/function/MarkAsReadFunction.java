@@ -5,7 +5,7 @@ import com.tekcapsule.core.utils.HeaderUtil;
 import com.tekcapsule.feedback.application.config.AppConstants;
 import com.tekcapsule.feedback.application.function.input.MarkAsReadInput;
 import com.tekcapsule.feedback.application.mapper.InputOutputMapper;
-import com.tekcapsule.feedback.domain.model.Feedback;ß
+import com.tekcapsule.feedback.domain.command.MarkAsReadCommand;
 import com.tekcapsule.feedback.domain.service.FeedbackService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -32,12 +32,12 @@ public class MarkAsReadFunction implements Function<Message<MarkAsReadInput>, Me
 
         MarkAsReadInput markAsReadInput = disableInputMessage.getPayload();
 
-        log.info(String.format("Entering disable mentor Function - Tenant Id:{0}, User Id:{1}", markAsReadInput.getTenantId(), markAsReadInput.getUserId()));
+        log.info(String.format("Entering mark as read feedback Function - Id:{0}", markAsReadInput.getId()));
 
         Origin origin = HeaderUtil.buildOriginFromHeaders(disableInputMessage.getHeaders());
 
-        DisableCommand disableCommand = InputOutputMapper.buildDisableCommandFromDisableInput.apply(markAsReadInput, origin);
-        mentorService.disable(disableCommand);
+        MarkAsReadCommand markAsReadCommand = InputOutputMapper.buildMarkAsReadCommandFromMarkAsReadInput.apply(markAsReadInput, origin);
+        feedbackService.markAsRead(markAsReadCommand);
         Map<String, Object> responseHeader = new HashMap();
         responseHeader.put(AppConstants.HTTP_STATUS_CODE_HEADER, HttpStatus.OK.value());
 

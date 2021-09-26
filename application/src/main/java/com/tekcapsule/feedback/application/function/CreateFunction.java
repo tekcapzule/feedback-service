@@ -5,6 +5,7 @@ import com.tekcapsule.core.utils.HeaderUtil;
 import com.tekcapsule.feedback.application.config.AppConstants;
 import com.tekcapsule.feedback.application.function.input.CreateInput;
 import com.tekcapsule.feedback.application.mapper.InputOutputMapper;
+import com.tekcapsule.feedback.domain.command.CreateCommand;
 import com.tekcapsule.feedback.domain.model.Feedback;
 import com.tekcapsule.feedback.domain.service.FeedbackService;
 import lombok.extern.slf4j.Slf4j;
@@ -33,15 +34,15 @@ public class CreateFunction implements Function<Message<CreateInput>, Message<Fe
 
         CreateInput createInput = createInputMessage.getPayload();
 
-        log.info(String.format("Entering create mentor Function - Tenant Id:{0}, Name:{1}", createInput.getTenantId(), createInput.getName().toString()));
+        log.info(String.format("Entering create feedback function - Email Id:{0}", createInput.getEmailId()));
 
         Origin origin = HeaderUtil.buildOriginFromHeaders(createInputMessage.getHeaders());
 
         CreateCommand createCommand = InputOutputMapper.buildCreateCommandFromCreateInput.apply(createInput, origin);
-        Mentor mentor = mentorService.create(createCommand);
+        Feedback feedback = feedbackService.create(createCommand);
         Map<String, Object> responseHeader = new HashMap();
         responseHeader.put(AppConstants.HTTP_STATUS_CODE_HEADER, HttpStatus.OK.value());
 
-        return new GenericMessage(mentor, responseHeader);
+        return new GenericMessage(feedback, responseHeader);
     }
 }
