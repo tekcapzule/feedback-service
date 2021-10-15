@@ -45,9 +45,9 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public void markAsRead(MarkAsReadCommand markAsReadCommand) {
 
-        log.info(String.format("Entering markAsRead feedback service - Id:{1}", markAsReadCommand.getId()));
+        log.info(String.format("Entering markAsRead feedback service - Id:{1}", markAsReadCommand.getEmailId()));
 
-        Feedback feedback = feedbackDynamoRepository.findBy(markAsReadCommand.getId());
+        Feedback feedback = feedbackDynamoRepository.findBy(markAsReadCommand.getEmailId());
         if (feedback != null) {
             feedback.setRead(true);
 
