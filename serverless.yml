@@ -37,7 +37,7 @@ functions:
     handler: org.springframework.cloud.function.adapter.aws.SpringBootStreamHandler
     events:
       - http:
-          path: feedback/search
+          path: feedback/findAll
           method: post
     environment:
       SPRING_CLOUD_FUNCTION_DEFINITION: findAllFunction

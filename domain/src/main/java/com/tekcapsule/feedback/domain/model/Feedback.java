@@ -9,7 +9,7 @@ import lombok.*;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @EqualsAndHashCode(callSuper = true)
-@DynamoDBTable(tableName = "Mentor")
+@DynamoDBTable(tableName = "Feedback")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
