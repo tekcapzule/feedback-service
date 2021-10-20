@@ -17,7 +17,7 @@ public class Feedback extends BaseDomainEntity<String> implements AggregateRoot 
 
     @DynamoDBHashKey(attributeName = "emailId")
     private String emailId;
-    @DynamoDBRangeKey(attributeName="date")
+    @DynamoDBRangeKey(attributeName="commentedOn")
     private String date;
     @DynamoDBAttribute(attributeName = "firstName")
     private String firstName;

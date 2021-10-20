@@ -26,11 +26,11 @@ public class FeedbackServiceImpl implements FeedbackService {
         log.info(String.format("Entering create feedback service - Email Id:{0}", createCommand.getEmailId()));
 
         Feedback feedback = Feedback.builder()
-                .description(createCommand.getDescription())
                 .emailId(createCommand.getEmailId())
                 .firstName(createCommand.getFirstName())
                 .lastName(createCommand.getLastName())
                 .subject(createCommand.getSubject())
+                .description(createCommand.getDescription())
                 .read(false)
                 .build();
 
@@ -50,10 +50,8 @@ public class FeedbackServiceImpl implements FeedbackService {
         Feedback feedback = feedbackDynamoRepository.findBy(markAsReadCommand.getEmailId());
         if (feedback != null) {
             feedback.setRead(true);
-
             feedback.setUpdatedOn(markAsReadCommand.getExecOn());
             feedback.setUpdatedBy(markAsReadCommand.getExecBy().getUserId());
-
             feedbackDynamoRepository.save(feedback);
         }
     }
@@ -61,7 +59,6 @@ public class FeedbackServiceImpl implements FeedbackService {
     public List<Feedback> findAll() {
 
         log.info(String.format("Entering findAll feedback service"));
-
         return feedbackDynamoRepository.findAll();
     }
 

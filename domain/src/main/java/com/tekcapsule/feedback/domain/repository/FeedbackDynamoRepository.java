@@ -6,4 +6,6 @@ import com.tekcapsule.feedback.domain.model.Feedback;
 
 public interface FeedbackDynamoRepository extends CrudRepository<Feedback, String> {
 
-}
+    public Feedback findBy(String hashKey, String rangeKey);
+
+    }

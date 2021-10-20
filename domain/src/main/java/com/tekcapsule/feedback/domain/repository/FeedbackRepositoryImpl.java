@@ -20,6 +20,7 @@ public class FeedbackRepositoryImpl implements FeedbackDynamoRepository {
         this.dynamo = dynamo;
     }
 
+
     @Override
     public List<Feedback> findAll() {
 
@@ -27,8 +28,13 @@ public class FeedbackRepositoryImpl implements FeedbackDynamoRepository {
     }
 
     @Override
-    public Feedback findBy(String id) {
-        return dynamo.load(Feedback.class, id);
+    public Feedback findBy(String hashKey, String rangeKey) {
+        return dynamo.load(Feedback.class, hashKey, rangeKey);
+    }
+
+    @Override
+    public Feedback findBy(String hashKey) {
+        return dynamo.load(Feedback.class, hashKey);
     }
 
     @Override

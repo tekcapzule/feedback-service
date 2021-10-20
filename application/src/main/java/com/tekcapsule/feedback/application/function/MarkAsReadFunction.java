@@ -32,7 +32,7 @@ public class MarkAsReadFunction implements Function<Message<MarkAsReadInput>, Me
 
         MarkAsReadInput markAsReadInput = markAsReadInputMessage.getPayload();
 
-        log.info(String.format("Entering mark as read feedback Function - Email Id:{0}", markAsReadInput.getId()));
+        log.info(String.format("Entering mark as read feedback Function - Email Id:{0}, Date {0}", markAsReadInput.getEmailId(),markAsReadInput.getCommentedOn()));
 
         Origin origin = HeaderUtil.buildOriginFromHeaders(markAsReadInputMessage.getHeaders());
 

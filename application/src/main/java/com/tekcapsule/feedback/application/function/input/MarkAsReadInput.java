@@ -8,5 +8,6 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
 public class MarkAsReadInput {
-    private String id;
+    private String emailId;
+    private String commentedOn;
 }

@@ -49,11 +49,15 @@ resources:
       Properties:
         TableName: Feedback
         AttributeDefinitions:
-          - AttributeName: id
+          - AttributeName: emailId
+            AttributeType: S
+          - AttributeName: commentedOn
             AttributeType: S
         KeySchema:
-          - AttributeName: id
+          - AttributeName: emailId
             KeyType: HASH
+          - AttributeName: commentedOn
+            KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
