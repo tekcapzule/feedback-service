@@ -33,14 +33,14 @@ functions:
           method: post
     environment:
       SPRING_CLOUD_FUNCTION_DEFINITION: markAsReadFunction
-  findAllFeedback:
+  getAllFeedbacks:
     handler: org.springframework.cloud.function.adapter.aws.SpringBootStreamHandler
     events:
       - http:
-          path: feedback/findAll
+          path: feedback/getAll
           method: post
     environment:
-      SPRING_CLOUD_FUNCTION_DEFINITION: findAllFunction
+      SPRING_CLOUD_FUNCTION_DEFINITION: getAllFunction
 
 resources:
   Resources:

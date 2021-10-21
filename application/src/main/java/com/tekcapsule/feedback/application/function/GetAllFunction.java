@@ -17,18 +17,18 @@ import java.util.function.Function;
 
 @Component
 @Slf4j
-public class FindAllFunction implements Function<Message<Void>, Message<List<Feedback>>> {
+public class GetAllFunction implements Function<Message<Void>, Message<List<Feedback>>> {
 
     private final FeedbackService feedbackService;
 
-    public FindAllFunction(final FeedbackService feedbackService) {
+    public GetAllFunction(final FeedbackService feedbackService) {
         this.feedbackService = feedbackService;
     }
 
 
     @Override
     public Message<List<Feedback>> apply(Message<Void> findAllInputMessage) {
-        log.info(String.format("Entering find all feedback Function"));
+        log.info(String.format("Entering get all feedback Function"));
 
         List<Feedback> feedbacks = feedbackService.findAll();
         Map<String, Object> responseHeader = new HashMap();
