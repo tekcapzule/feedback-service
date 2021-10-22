@@ -34,7 +34,7 @@ public class CreateFunction implements Function<Message<CreateInput>, Message<Fe
 
         CreateInput createInput = createInputMessage.getPayload();
 
-        log.info(String.format("Entering create feedback function - Email Id:{0}", createInput.getEmailId()));
+        log.info(String.format("Entering create feedback function - Email Id:%S", createInput.getEmailId()));
 
         Origin origin = HeaderUtil.buildOriginFromHeaders(createInputMessage.getHeaders());
 

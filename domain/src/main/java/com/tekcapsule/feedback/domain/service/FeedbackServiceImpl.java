@@ -23,7 +23,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public Feedback create(CreateCommand createCommand) {
 
-        log.info(String.format("Entering create feedback service - Email Id:{0}", createCommand.getEmailId()));
+        log.info(String.format("Entering create feedback service - Email Id:%S", createCommand.getEmailId()));
 
         Feedback feedback = Feedback.builder()
                 .emailId(createCommand.getEmailId())
@@ -45,7 +45,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public void markAsRead(MarkAsReadCommand markAsReadCommand) {
 
-        log.info(String.format("Entering markAsRead feedback service - Email Id:{0}", markAsReadCommand.getEmailId()));
+        log.info(String.format("Entering markAsRead feedback service - Email Id:%S", markAsReadCommand.getEmailId()));
 
         Feedback feedback = feedbackDynamoRepository.findBy(markAsReadCommand.getEmailId());
         if (feedback != null) {
@@ -58,7 +58,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public List<Feedback> findAll() {
 
-        log.info(String.format("Entering findAll feedback service"));
+        log.info("Entering findAll feedback service");
         return feedbackDynamoRepository.findAll();
     }
 

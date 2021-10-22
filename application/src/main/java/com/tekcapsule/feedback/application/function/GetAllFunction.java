@@ -28,7 +28,7 @@ public class GetAllFunction implements Function<Message<Void>, Message<List<Feed
 
     @Override
     public Message<List<Feedback>> apply(Message<Void> findAllInputMessage) {
-        log.info(String.format("Entering get all feedback Function"));
+        log.info("Entering get all feedback Function");
 
         List<Feedback> feedbacks = feedbackService.findAll();
         Map<String, Object> responseHeader = new HashMap();

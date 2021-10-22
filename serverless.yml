@@ -44,7 +44,7 @@ functions:
 
 resources:
   Resources:
-    productsTable:
+    feedbackTable:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: Feedback
