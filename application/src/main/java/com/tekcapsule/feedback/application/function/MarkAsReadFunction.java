@@ -38,9 +38,9 @@ public class MarkAsReadFunction implements Function<Message<MarkAsReadInput>, Me
 
         MarkAsReadCommand markAsReadCommand = InputOutputMapper.buildMarkAsReadCommandFromMarkAsReadInput.apply(markAsReadInput, origin);
         feedbackService.markAsRead(markAsReadCommand);
-        Map<String, Object> responseHeader = new HashMap();
+        Map<String, Object> responseHeader = new HashMap<>();
         responseHeader.put(AppConstants.HTTP_STATUS_CODE_HEADER, HttpStatus.OK.value());
 
-        return new GenericMessage( responseHeader);
+        return new GenericMessage(responseHeader);
     }
 }

@@ -31,9 +31,9 @@ public class GetAllFunction implements Function<Message<Void>, Message<List<Feed
         log.info("Entering get all feedback Function");
 
         List<Feedback> feedbacks = feedbackService.findAll();
-        Map<String, Object> responseHeader = new HashMap();
+        Map<String, Object> responseHeader = new HashMap<>();
         responseHeader.put(AppConstants.HTTP_STATUS_CODE_HEADER, HttpStatus.OK.value());
 
-        return new GenericMessage(feedbacks, responseHeader);
+        return new GenericMessage<>(feedbacks, responseHeader);
     }
 }

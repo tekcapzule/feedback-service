@@ -40,9 +40,9 @@ public class CreateFunction implements Function<Message<CreateInput>, Message<Fe
 
         CreateCommand createCommand = InputOutputMapper.buildCreateCommandFromCreateInput.apply(createInput, origin);
         Feedback feedback = feedbackService.create(createCommand);
-        Map<String, Object> responseHeader = new HashMap();
+        Map<String, Object> responseHeader = new HashMap<>();
         responseHeader.put(AppConstants.HTTP_STATUS_CODE_HEADER, HttpStatus.OK.value());
 
-        return new GenericMessage(feedback, responseHeader);
+        return new GenericMessage<>(feedback, responseHeader);
     }
 }
