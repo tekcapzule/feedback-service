@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "MarkAsReadInputModel",
+  "type": "object",
+  "required": [
+    "emailId",
+    "commentedOn"
+  ],
+  "properties": {
+    "emailId": {
+      "type": "string"
+    },
+    "commentedOn": {
+      "type": "string"
+    }
+  }
+}

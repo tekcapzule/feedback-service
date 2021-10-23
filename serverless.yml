@@ -2,6 +2,7 @@ service: feedback-service
 package:
   version: 0.0.1-SNAPSHOT
   artifact: ./application/target/${self:service}-${self:package.version}-${self:provider}.jar
+  excludeDevDependencies: true
 provider:
   name: aws
   runtime: java11
@@ -14,31 +15,54 @@ provider:
         - "dynamodb:*"
       Resource: "*"
   environment:
-    APPLICATION_ENVIRONMENT: Dev
+    APPLICATION_ENVIRONMENT: ${opt:stage}
     CLOUD_REGION: US_East_2
 functions:
   createFeedback:
-    handler: org.springframework.cloud.function.adapter.aws.SpringBootStreamHandler
+    handler: org.springframework.cloud.function.adapter.aws.SpringBootApiGatewayRequestHandler
     events:
       - http:
           path: feedback/create
           method: post
+          async: true
+          cors: true
+          request:
+            schemas:
+              application/json:
+                schema: ${file(api-gateway/create.json)}
+                name: GetModel
+                description: 'create feedback model'
     environment:
       SPRING_CLOUD_FUNCTION_DEFINITION: createFunction
   markFeedbackAsRead:
-    handler: org.springframework.cloud.function.adapter.aws.SpringBootStreamHandler
+    handler: org.springframework.cloud.function.adapter.aws.SpringBootApiGatewayRequestHandler
     events:
       - http:
           path: feedback/markAsRead
           method: post
+          async: true
+          cors: true
+          request:
+            schemas:
+              application/json:
+                schema: ${file(api-gateway/markAsRead.json)}
+                name: GetModel
+                description: 'mark feedback as read model'
     environment:
       SPRING_CLOUD_FUNCTION_DEFINITION: markAsReadFunction
   getAllFeedbacks:
-    handler: org.springframework.cloud.function.adapter.aws.SpringBootStreamHandler
+    handler: org.springframework.cloud.function.adapter.aws.SpringBootApiGatewayRequestHandler
     events:
       - http:
           path: feedback/getAll
           method: post
+          cors: true
+          request:
+            schemas:
+              application/json:
+                schema: ${file(api-gateway/getAll.json)}
+                name: GetModel
+                description: 'get all feedback model'
     environment:
       SPRING_CLOUD_FUNCTION_DEFINITION: getAllFunction
 

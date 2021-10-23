@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface FeedbackService {
 
-    Feedback create(CreateCommand createCommand);
+    void create(CreateCommand createCommand);
 
     void markAsRead(MarkAsReadCommand markAsReadCommand);
 

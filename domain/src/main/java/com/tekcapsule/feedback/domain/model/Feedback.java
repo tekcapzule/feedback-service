@@ -13,7 +13,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Feedback extends BaseDomainEntity<String> implements AggregateRoot {
+public class Feedback extends BaseDomainEntity implements AggregateRoot {
 
     @DynamoDBHashKey(attributeName = "emailId")
     private String emailId;

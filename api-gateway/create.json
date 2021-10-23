@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "CreateInputModel",
+  "type": "object",
+  "required": [
+    "emailId",
+    "firstName",
+    "lastName",
+    "subject",
+    "description"
+  ],
+  "properties": {
+    "emailId": {
+      "type": "string"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  }
+}

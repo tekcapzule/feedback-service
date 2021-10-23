@@ -20,7 +20,7 @@ import java.util.function.Function;
 
 @Component
 @Slf4j
-public class CreateFunction implements Function<Message<CreateInput>, Message<Feedback>> {
+public class CreateFunction implements Function<Message<CreateInput>, Message<Void>> {
 
     private final FeedbackService feedbackService;
 
@@ -30,7 +30,7 @@ public class CreateFunction implements Function<Message<CreateInput>, Message<Fe
 
 
     @Override
-    public Message<Feedback> apply(Message<CreateInput> createInputMessage) {
+    public Message<Void> apply(Message<CreateInput> createInputMessage) {
 
         CreateInput createInput = createInputMessage.getPayload();
 
@@ -39,10 +39,10 @@ public class CreateFunction implements Function<Message<CreateInput>, Message<Fe
         Origin origin = HeaderUtil.buildOriginFromHeaders(createInputMessage.getHeaders());
 
         CreateCommand createCommand = InputOutputMapper.buildCreateCommandFromCreateInput.apply(createInput, origin);
-        Feedback feedback = feedbackService.create(createCommand);
+        feedbackService.create(createCommand);
         Map<String, Object> responseHeader = new HashMap<>();
         responseHeader.put(AppConstants.HTTP_STATUS_CODE_HEADER, HttpStatus.OK.value());
 
-        return new GenericMessage<>(feedback, responseHeader);
+        return new GenericMessage( responseHeader);
     }
 }

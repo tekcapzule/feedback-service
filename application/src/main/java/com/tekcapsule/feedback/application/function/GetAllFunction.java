@@ -1,5 +1,6 @@
 package com.tekcapsule.feedback.application.function;
 
+import com.tekcapsule.core.domain.EmptyFunctionInput;
 import com.tekcapsule.feedback.application.config.AppConstants;
 import com.tekcapsule.feedback.domain.model.Feedback;
 import com.tekcapsule.feedback.domain.service.FeedbackService;
@@ -17,7 +18,7 @@ import java.util.function.Function;
 
 @Component
 @Slf4j
-public class GetAllFunction implements Function<Message<Void>, Message<List<Feedback>>> {
+public class GetAllFunction implements Function<Message<EmptyFunctionInput>, Message<List<Feedback>>> {
 
     private final FeedbackService feedbackService;
 
@@ -27,7 +28,7 @@ public class GetAllFunction implements Function<Message<Void>, Message<List<Feed
 
 
     @Override
-    public Message<List<Feedback>> apply(Message<Void> findAllInputMessage) {
+    public Message<List<Feedback>> apply(Message<EmptyFunctionInput> findAllInputMessage) {
         log.info("Entering get all feedback Function");
 
         List<Feedback> feedbacks = feedbackService.findAll();

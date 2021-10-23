@@ -21,7 +21,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    public Feedback create(CreateCommand createCommand) {
+    public void create(CreateCommand createCommand) {
 
         log.info(String.format("Entering create feedback service - Email Id:%S", createCommand.getEmailId()));
 
@@ -39,7 +39,7 @@ public class FeedbackServiceImpl implements FeedbackService {
         feedback.setAddedBy(createCommand.getExecBy().getUserId());
         feedback.setUpdatedBy(createCommand.getExecBy().getUserId());
 
-        return feedbackDynamoRepository.save(feedback);
+        feedbackDynamoRepository.save(feedback);
     }
 
     @Override
