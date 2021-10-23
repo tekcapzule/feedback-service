@@ -30,7 +30,7 @@ functions:
             schemas:
               application/json:
                 schema: ${file(api-gateway/create.json)}
-                name: GetModel
+                name: CreateFeedbackModel
                 description: 'create feedback model'
     environment:
       SPRING_CLOUD_FUNCTION_DEFINITION: createFunction
@@ -46,7 +46,7 @@ functions:
             schemas:
               application/json:
                 schema: ${file(api-gateway/markAsRead.json)}
-                name: GetModel
+                name: MarkFeedbackAsReadModel
                 description: 'mark feedback as read model'
     environment:
       SPRING_CLOUD_FUNCTION_DEFINITION: markAsReadFunction
@@ -61,7 +61,7 @@ functions:
             schemas:
               application/json:
                 schema: ${file(api-gateway/getAll.json)}
-                name: GetModel
+                name: GetAllFeedbacksModel
                 description: 'get all feedback model'
     environment:
       SPRING_CLOUD_FUNCTION_DEFINITION: getAllFunction
