@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 
 @Slf4j
@@ -23,7 +24,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public void create(CreateCommand createCommand) {
 
-        log.info(String.format("Entering create feedback service - Email Id:%S", createCommand.getEmailId()));
+        log.info(String.format("Entering create feedback service - Email Id:%s", createCommand.getEmailId()));
 
         Feedback feedback = Feedback.builder()
                 .emailId(createCommand.getEmailId())
@@ -31,6 +32,7 @@ public class FeedbackServiceImpl implements FeedbackService {
                 .lastName(createCommand.getLastName())
                 .subject(createCommand.getSubject())
                 .description(createCommand.getDescription())
+                .commentedOn(Instant.now().toString())
                 .read(false)
                 .build();
 
@@ -45,7 +47,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public void markAsRead(MarkAsReadCommand markAsReadCommand) {
 
-        log.info(String.format("Entering markAsRead feedback service - Email Id:%S", markAsReadCommand.getEmailId()));
+        log.info(String.format("Entering markAsRead feedback service - Email Id:%s", markAsReadCommand.getEmailId()));
 
         Feedback feedback = feedbackDynamoRepository.findBy(markAsReadCommand.getEmailId());
         if (feedback != null) {
