@@ -10,5 +10,5 @@ import lombok.Data;
 @Builder
 public class MarkAsReadCommand extends Command {
     private String emailId;
-    private String date;
+    private String commentedOn;
 }

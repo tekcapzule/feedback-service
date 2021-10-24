@@ -49,7 +49,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 
         log.info(String.format("Entering markAsRead feedback service - Email Id:%s", markAsReadCommand.getEmailId()));
 
-        Feedback feedback = feedbackDynamoRepository.findBy(markAsReadCommand.getEmailId());
+        Feedback feedback = feedbackDynamoRepository.findBy(markAsReadCommand.getEmailId(),markAsReadCommand.getCommentedOn());
         if (feedback != null) {
             feedback.setRead(true);
             feedback.setUpdatedOn(markAsReadCommand.getExecOn());
