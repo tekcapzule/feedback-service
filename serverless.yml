@@ -69,7 +69,7 @@ resources:
     feedbackTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: Feedback
+        TableName: ${opt:stage}Feedback
         AttributeDefinitions:
           - AttributeName: emailId
             AttributeType: S
