@@ -25,6 +25,7 @@ functions:
           path: feedback/create
           method: post
           cors: true
+          async: true
           request:
             schemas:
               application/json:
@@ -40,6 +41,7 @@ functions:
           path: feedback/markAsRead
           method: post
           cors: true
+          async: true
           request:
             schemas:
               application/json:
