@@ -87,6 +87,19 @@ functions:
       SPRING_CLOUD_FUNCTION_DEFINITION: getAllFunction
 
 resources:
+  extensions:
+    CreateFeedbackLambdaFunction:
+      Properties:
+        SnapStart:
+          ApplyOn: PublishedVersions
+    MarkFeedbackAsReadLambdaFunction:
+      Properties:
+        SnapStart:
+          ApplyOn: PublishedVersions
+    GetAllFeedbacksLambdaFunction:
+      Properties:
+        SnapStart:
+          ApplyOn: PublishedVersions
   Resources:
     feedbackTable:
       Type: AWS::DynamoDB::Table
