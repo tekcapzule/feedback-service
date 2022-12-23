@@ -1,0 +1,34 @@
+name: CICD Pipeline 2
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+env:
+  SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+  SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}
+jobs:
+  devDeploy:
+    name: DEV Deploy
+    environment:
+      name: DEV
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+        with:
+          python-version: "3.8"
+      - uses: aws-actions/setup-sam@v2
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+      - run: cp settings.xml ~/.m2/settings.xml
+  # Build inside Docker containers
+      - run: sam build 
+  # Prevent prompts and failure when the stack is unchanged
+      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --parameter-overrides Stage=dev
+
+
