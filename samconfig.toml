@@ -10,3 +10,15 @@ confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
 parameter_overrides = "Stage=\"dev\""
 image_repositories = []
+
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "feedback-service"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-10e91gp657n0w"
+s3_prefix = "feedback-service"
+region = "us-west-2"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "Stage=\"dev\""
+image_repositories = []
