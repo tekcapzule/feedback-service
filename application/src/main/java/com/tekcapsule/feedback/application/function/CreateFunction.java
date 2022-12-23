@@ -37,7 +37,9 @@ public class CreateFunction implements Function<Message<CreateInput>, Message<Vo
         Map<String, Object> responseHeaders = new HashMap<>();
         Map<String, Object> payload = new HashMap<>();
         String stage = appConfig.getStage().toUpperCase();
+
         try {
+
             CreateInput createInput = createInputMessage.getPayload();
             log.info(String.format("Entering create feedback function - Email Id:%s", createInput.getEmailId()));
             Origin origin = HeaderUtil.buildOriginFromHeaders(createInputMessage.getHeaders());
