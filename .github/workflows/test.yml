@@ -10,7 +10,6 @@ env:
   SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}
 jobs:
   devDeploy:
-    needs: publish
     name: DEV Deploy
     environment:
       name: DEV
