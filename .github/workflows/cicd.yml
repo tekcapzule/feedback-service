@@ -9,7 +9,7 @@ env:
   SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
   SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}
 jobs:
-    buildAndInspect:
+  buildAndInspect:
     name: Build and Inspect
     runs-on: ubuntu-latest
     steps:
