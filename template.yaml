@@ -20,6 +20,8 @@ Globals:
     CodeUri: ./application
     Tags:
         Stage: !Ref Stage
+        Service: Feedback
+        Resource: Lambda
     Environment:
       Variables:
         TABLE: !Ref FeedbackTable
@@ -71,15 +73,12 @@ Resources:
   CreateFeedbackFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub "${Stage}CreateFeedback"
+      FunctionName: !Sub "${Stage}-Feedback-CreateFeedback"
       SnapStart:
         ApplyOn: PublishedVersions
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref FeedbackTable
-      Environment:
-        Variables:
-          SPRING_CLOUD_FUNCTION_DEFINITION: createFunction
       Events:
         ApiEvent:
           Type: Api
@@ -92,15 +91,12 @@ Resources:
   MarkFeedbackAsReadFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub "${Stage}MarkFeedbackAsRead"
+      FunctionName: !Sub "${Stage}-Feedback-MarkFeedbackAsRead"
       SnapStart:
         ApplyOn: PublishedVersions
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref FeedbackTable
-      Environment:
-        Variables:
-          SPRING_CLOUD_FUNCTION_DEFINITION: markAsReadFunction
       Events:
         ApiEvent:
           Type: Api
@@ -113,15 +109,12 @@ Resources:
   GetAllFeedbacksFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub "${Stage}GetAllFeedbacks"
+      FunctionName: !Sub "${Stage}-Feedback-GetAllFeedbacks"
       SnapStart:
         ApplyOn: PublishedVersions
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref FeedbackTable
-      Environment:
-        Variables:
-          SPRING_CLOUD_FUNCTION_DEFINITION: getAllFunction
       Events:
         ApiEvent:
           Type: Api
