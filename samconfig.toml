@@ -3,19 +3,19 @@ version = 0.1
 [dev.deploy]
 [dev.deploy.parameters]
 stack_name = "dev-feedback-service"
-s3_bucket = "dev-aws-sam-cli-managed-samclisourcebucket"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1bmpga5thxtj4"
 s3_prefix = "dev-feedback-service"
 region = "us-west-2"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
-parameter_overrides = "Stage=\"dev\" Environment=\"dev\""
+parameter_overrides = "Stage=\"dev\""
 image_repositories = []
 
 [prod]
 [prod.deploy]
 [prod.deploy.parameters]
 stack_name = "prod-feedback-service"
-s3_bucket = "prod-aws-sam-cli-managed-samclisourcebucket"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1bmpga5thxtj4"
 s3_prefix = "prod-feedback-service"
 region = "us-west-2"
 confirm_changeset = true

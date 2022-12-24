@@ -18,6 +18,8 @@ Globals:
     AutoPublishAlias: !Ref Stage
     Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker
     CodeUri: ./application
+    Tags:
+      - !Ref Stage
     Environment:
       Variables:
         TABLE: !Ref FeedbackTable
