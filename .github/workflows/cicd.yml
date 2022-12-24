@@ -2,14 +2,14 @@ name: CICD Pipeline
 on:
   push:
     branches:
-      - main
+      - main1
   pull_request:
     types: [opened, synchronize, reopened]
 env:
   SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
   SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}
 jobs:
-  buildAndInspect:
+    buildAndInspect:
     name: Build and Inspect
     runs-on: ubuntu-latest
     steps:
@@ -101,7 +101,7 @@ jobs:
   # Build inside Docker containers
       - run: sam build 
   # Prevent prompts and failure when the stack is unchanged
-      - run: sam deploy --config-file samconfig-dev.toml --no-confirm-changeset --no-fail-on-empty-changeset --parameter-overrides Stage=dev
+      - run: sam deploy --config-file samconfig.toml --no-confirm-changeset --no-fail-on-empty-changeset --parameter-overrides Stage=dev
   prodDeploy:
     needs: devDeploy
     name: PROD Deploy

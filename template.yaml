@@ -33,7 +33,7 @@ Resources:
   FeedbackApi:
     Type: AWS::Serverless::Api
     Properties:
-      Name: !Sub "feedback-api-${Stage}"
+      Name: !Sub "feedback-${Stage}"
       StageName: !Ref Stage
       Cors:
         AllowMethods: "'POST, GET'"
@@ -69,6 +69,7 @@ Resources:
   CreateFeedbackFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: !Sub "${Stage}CreateFeedback"
       SnapStart:
         ApplyOn: PublishedVersions
       Policies:
@@ -89,6 +90,7 @@ Resources:
   MarkFeedbackAsReadFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: !Sub "${Stage}MarkFeedbackAsRead"
       SnapStart:
         ApplyOn: PublishedVersions
       Policies:
@@ -109,6 +111,7 @@ Resources:
   GetAllFeedbacksFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: !Sub "${Stage}GetAllFeedbacks"
       SnapStart:
         ApplyOn: PublishedVersions
       Policies:
