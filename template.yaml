@@ -19,9 +19,9 @@ Globals:
     Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker
     CodeUri: ./application
     Tags:
-        Stage: !Ref Stage
-        Service: Feedback
-        Resource: Lambda
+      Stage: !Ref Stage
+      Service: Feedback
+      Resource: Lambda
     Environment:
       Variables:
         TABLE: !Ref FeedbackTable
@@ -79,6 +79,9 @@ Resources:
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref FeedbackTable
+      Environment:
+        Variables:
+          SPRING_CLOUD_FUNCTION_DEFINITION: createFunction
       Events:
         ApiEvent:
           Type: Api
@@ -97,6 +100,9 @@ Resources:
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref FeedbackTable
+      Environment:
+        Variables:
+          SPRING_CLOUD_FUNCTION_DEFINITION: markAsReadFunction
       Events:
         ApiEvent:
           Type: Api
@@ -115,6 +121,9 @@ Resources:
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref FeedbackTable
+      Environment:
+        Variables:
+          SPRING_CLOUD_FUNCTION_DEFINITION: getAllFunction
       Events:
         ApiEvent:
           Type: Api
