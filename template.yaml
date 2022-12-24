@@ -19,7 +19,7 @@ Globals:
     Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker
     CodeUri: ./application
     Tags:
-      - !Ref Stage
+        Stage: !Ref Stage
     Environment:
       Variables:
         TABLE: !Ref FeedbackTable
@@ -130,6 +130,30 @@ Resources:
             Method: post
             RestApiId:
               Ref: FeedbackApi
+
+  ApiGatewayPermissionForCreateFeedback:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: "lambda:InvokeFunction"
+      FunctionName: !Ref CreateFeedbackFunction
+      Principal: "apigateway.amazonaws.com"
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${FeedbackApi}/*/POST/*"
+
+  ApiGatewayPermissionForMarkFeedbackAsRead:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: "lambda:InvokeFunction"
+      FunctionName: !Ref MarkFeedbackAsReadFunction
+      Principal: "apigateway.amazonaws.com"
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${FeedbackApi}/*/POST/*"
+
+  ApiGatewayPermissionForGetAllFeedback:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: "lambda:InvokeFunction"
+      FunctionName: !Ref GetAllFeedbacksFunction
+      Principal: "apigateway.amazonaws.com"
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${FeedbackApi}/*/POST/*"
 
   # Set Output Variable
 
