@@ -8,4 +8,6 @@ public interface FeedbackDynamoRepository extends CrudRepository<Feedback, Strin
 
     public Feedback findBy(String hashKey, String rangeKey);
 
+    int getAllFeedbacksCount();
+
     }

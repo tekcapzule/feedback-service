@@ -133,6 +133,27 @@ Resources:
             RestApiId:
               Ref: FeedbackApi
 
+  GetFeedbacksCountFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "${Stage}-Feedback-GetFeedbacksCount"
+      SnapStart:
+        ApplyOn: PublishedVersions
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref FeedbackTable
+      Environment:
+        Variables:
+          SPRING_CLOUD_FUNCTION_DEFINITION: getCountFunction
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: feedback/getCount
+            Method: post
+            RestApiId:
+              Ref: FeedbackApi
+
   # Set Output Variable
 
 Outputs:
