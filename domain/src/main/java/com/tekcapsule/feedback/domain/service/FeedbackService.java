@@ -14,4 +14,8 @@ public interface FeedbackService {
     void markAsRead(MarkAsReadCommand markAsReadCommand);
 
     List<Feedback> findAll();
+
+    int getAllFeedbacksCount();
+
+
 }

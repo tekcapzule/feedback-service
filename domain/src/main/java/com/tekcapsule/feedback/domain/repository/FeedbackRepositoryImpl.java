@@ -2,6 +2,7 @@ package com.tekcapsule.feedback.domain.repository;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
+import com.amazonaws.services.dynamodbv2.model.Select;
 import com.tekcapsule.feedback.domain.model.Feedback;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,4 +43,11 @@ public class FeedbackRepositoryImpl implements FeedbackDynamoRepository {
         dynamo.save(feedback);
         return feedback;
     }
+
+    @Override
+    public int getAllFeedbacksCount() {
+        return dynamo.count(Feedback.class,new DynamoDBScanExpression().withSelect(Select.COUNT));
+    }
+
+
 }

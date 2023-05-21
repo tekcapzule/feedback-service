@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.tekcapsule</groupId>
     <artifactId>feedback-service</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>Feedback Service</name>
     <description>Feedback Service</description>
     <properties>
@@ -45,7 +45,7 @@
         <dependency>
             <groupId>com.tekcapsule</groupId>
             <artifactId>feedback-domain</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

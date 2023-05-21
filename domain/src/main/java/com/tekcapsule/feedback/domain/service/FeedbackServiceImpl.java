@@ -64,4 +64,13 @@ public class FeedbackServiceImpl implements FeedbackService {
         return feedbackDynamoRepository.findAll();
     }
 
+    @Override
+    public int getAllFeedbacksCount() {
+        log.info("Entering getall feedbacks count service");
+        return feedbackDynamoRepository.getAllFeedbacksCount();
+    }
+
+
+
+
 }
