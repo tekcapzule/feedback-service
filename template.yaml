@@ -27,7 +27,7 @@ Globals:
         TABLE: !Ref FeedbackTable
         APPLICATION_ENVIRONMENT: !Ref Stage
         CLOUD_REGION: us-east-1
-        MAIN_CLASS: com.tekcapsule.feedback.application.FeedbackApplication
+        MAIN_CLASS: com.tekcapzule.feedback.application.FeedbackApplication
         JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
 
 Resources:

@@ -3,14 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.tekcapsule</groupId>
+    <groupId>com.tekcapzule</groupId>
     <artifactId>feedback-application</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <packaging>pom</packaging>
     <name>Feedback Application</name>
     <description>Feedback Application</description>
     <properties>
-        <sonar.organization>tekcapsule</sonar.organization>
+        <sonar.organization>tekcapzule</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     <modules>
@@ -31,7 +31,7 @@
         <repository>
             <id>feedback</id>
             <name>GitHub TekCapsule Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/tekcapsule/feedback-service</url>
+            <url>https://maven.pkg.github.com/tekcapzule/feedback-service</url>
         </repository>
     </distributionManagement>
 </project>

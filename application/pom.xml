@@ -8,16 +8,16 @@
         <version>2.7.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.tekcapsule</groupId>
+    <groupId>com.tekcapzule</groupId>
     <artifactId>feedback-service</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <name>Feedback Service</name>
     <description>Feedback Service</description>
     <properties>
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <sonar.organization>tekcapsule</sonar.organization>
+        <sonar.organization>tekcapzule</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <wrapper.version>1.0.27.RELEASE</wrapper.version>
         <aws-lambda-events.version>3.9.0</aws-lambda-events.version>
@@ -38,14 +38,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.tekcapsule</groupId>
-            <artifactId>tekcapsule-core</artifactId>
-            <version>1.0.2</version>
+            <groupId>com.tekcapzule</groupId>
+            <artifactId>tekcapzule-core</artifactId>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
-            <groupId>com.tekcapsule</groupId>
+            <groupId>com.tekcapzule</groupId>
             <artifactId>feedback-domain</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -114,7 +114,7 @@
         <repository>
             <id>feedback</id>
             <name>GitHub TekCapsule Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/tekcapsule/feedback-service</url>
+            <url>https://maven.pkg.github.com/tekcapzule/feedback-service</url>
         </repository>
     </distributionManagement>
 </project>
