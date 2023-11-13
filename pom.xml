@@ -30,7 +30,7 @@
     <distributionManagement>
         <repository>
             <id>feedback</id>
-            <name>GitHub TekCapsule Apache Maven Packages</name>
+            <name>GitHub TekCapzule Apache Maven Packages</name>
             <url>https://maven.pkg.github.com/tekcapzule/feedback-service</url>
         </repository>
     </distributionManagement>
