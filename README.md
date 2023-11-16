@@ -57,8 +57,6 @@
 
 This project contains set of functions written in Java 11 to create, update, query and manage TekCapzule feedbacks. It is a multi-module maven project with two modules named application & domain. Application module is a springboot application that exposes these functions and domain module contains the domain logic.
 
-![feedback-service](https://user-images.githubusercontent.com/9839481/209629238-99f37b78-fc8c-4edf-a48d-79d1f63f7b41.png)
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
