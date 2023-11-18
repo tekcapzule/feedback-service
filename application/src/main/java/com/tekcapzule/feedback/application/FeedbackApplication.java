@@ -3,7 +3,7 @@ package com.tekcapzule.feedback.application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = {"com.tekcapsule.feedback","com.tekcapsule.core"})
+@SpringBootApplication(scanBasePackages = {"com.tekcapzule.feedback","com.tekcapzule.core"})
 public class FeedbackApplication {
 
     public static void main(String[] args) {
